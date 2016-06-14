@@ -1,18 +1,38 @@
 <html>
- <head>
+<head>
+  <meta charset="utf-8"> 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
   <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-  </head>
- <body>
-  <h1>Here you can create your own album</h1>
-  <div class="dropzone" id="dropzoneForm">
-  </div>
-  <form class="requestAlbumForm" action="{{url_for('request_album_creation')}}" 
-method="POST">
-     <input name="email" type="text"/>
-     <button type="submit">Create Album</button>
-  </form>
+  <style type="text/css">
+	#dropzoneForm { font-family: Verdana; font-size: 10px; background-color: #6699cc; }
+	#mail { font-family: Verdana; font-size: 15px; background-color: #ccccff; }
+   </style>
+</head>
+ 
+<body bgcolor="#9999ff">
+<center><table>
+<tr>
+	<td> <center><h1><font face="Trebuchet MS" color="#000066">Tutaj stworzysz album PDF z własnymi zdjęciami!</h1><h3>Szybki i prosty sposób na uporządkowanie Twoich fotografii.</br>Dodaj zdjęcia, podaj adres e-mail i ciesz się świetnym albumem!</h3>   </font></center></td>
+	<td><center> <img src="http://wizard.uek.krakow.pl/~s168840/images/album.png" alt="Album na zdjęcia" /></center></td>
+</tr> 
+<tr>
+	<td colspan="2"><center><font face="Arial"><b>Krok 1:</b> Przeciągnij swoje zdjęcia w poniższe pole</font></center>
+	<div class="dropzone" id="dropzoneForm"></div>
+	</td>  
+</tr>
+<tr>
+	<td colspan="2">
+		<center></br><font face="Arial"><b>Krok 2:</b> Podaj adres e-mail na który ma zostać wysłany gotowy album i kliknij "Utwórz album"</font></center>
+		<form class="requestAlbumForm" action="{{url_for('request_album_creation')}}" method="POST">
+			<center><input id="mail" name="email" size="30" type="text"/>
+			<button type="submit">UTWÓRZ ALBUM</button></center>
+		</form>	
+		<center><font face="Arial"><b>Krok 3:</b> Gotowe! Gdy album będzie gotowy, wyślemy go na podany adres e-mail.</font></center>
+	</td>
+</tr>
+</table></center>
+
   <script type="text/javascript">
    var createInput = function(count, path) {
        	 var input = '<input type="hidden" class="photo" name="photos___number__" value="__value__"/>"'
@@ -28,6 +48,7 @@ method="POST">
        console.log(response);
        var photosCount = $('.requestAlbumForm input.photo').length;
        
+	
        response.photos.forEach(function(photo){
         input = createInput(photosCount, photo)
         $('.requestAlbumForm').append($(input));
@@ -36,4 +57,5 @@ method="POST">
      }
    });
   </script>
- </body> </html>
+</body>
+</html>
